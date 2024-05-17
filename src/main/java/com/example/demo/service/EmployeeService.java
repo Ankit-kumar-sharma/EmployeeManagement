@@ -45,6 +45,10 @@ public class EmployeeService {
             response.setErrorMessage("Error Occurred while fetching employees data!");
             return response;
         }
+        if(eligibleEmployees==null || eligibleEmployees.size()==0){
+            response.setErrorMessage("No Data available,Kindly add the data first then try to get it !");
+            return response;
+        }
 
         // Group employees by currency
         Map<String, List<Employee>> currencyMap = eligibleEmployees.stream()
