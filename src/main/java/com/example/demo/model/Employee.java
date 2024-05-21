@@ -19,9 +19,6 @@ public class Employee {
 
     @Column
     private String empName;
-
-    @Column
-    private String department;
     @Column
     private double amount;
     @Column
@@ -33,37 +30,60 @@ public class Employee {
     @Temporal(TemporalType.DATE)
     private Date exitDate;
 
-    public Employee() {
-    }
-    public void setEmpName(String empName){
-        this.empName=empName;
-    }
-    public void setDepartment(String department){
-        this.department=department;
-    }
-    public void setAmount(double amount){
-        this.amount=amount;
-    }
-    public void setCurrency(String currency){
-        this.currency=currency;
-    }
-    public String getCurrency(){
-        return this.currency;
-    }
-    public String getEmpName(){
-        return this.empName;
-    }
-    public double getAmount(){
-        return this.amount;
-    }
-    public void setJoiningDate(String joiningDateStr) {
-        this.joiningDate = parseDate(joiningDateStr);
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+
+    public String getEmpName() {
+        return empName;
     }
 
-    public void setExitDate(String exitDateStr) {
-        this.exitDate = parseDate(exitDateStr);
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
 
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public Date getJoiningDate() {
+        return joiningDate;
+    }
+
+    public void setJoiningDate(String joiningDate) {
+        this.joiningDate = parseDate(joiningDate);
+    }
+
+    public Date getExitDate() {
+        return exitDate;
+    }
+
+    public void setExitDate(String exitDate) {
+        this.exitDate = parseDate(exitDate);
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String departmentName) {
+        Department department=new Department();
+        department.setDepartment(departmentName);
+        this.department = department;
+    }
     private Date parseDate(String dateStr) {
         SimpleDateFormat formatter = new SimpleDateFormat("MMM-dd-yyyy");
         try {

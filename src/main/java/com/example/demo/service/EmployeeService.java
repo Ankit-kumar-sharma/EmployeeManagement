@@ -4,29 +4,34 @@ import com.example.demo.BonusData;
 import com.example.demo.BonusResponse;
 import com.example.demo.CustomDateUtility;
 import com.example.demo.EmployeeBonus;
+import com.example.demo.model.Department;
 import com.example.demo.model.Employee;
+import com.example.demo.respository.DepartmentRepository;
 import com.example.demo.respository.EmployeeRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.Date;
 
 @Service
 public class EmployeeService {
 
-    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+    private EmployeeRepository employeeRepository;
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
-    public List<Employee> saveEmployees(List<Employee> employees) {
-        return employeeRepository.saveAll(employees);
+
+    public void saveEmployees(List<Employee> employees) {
+        for (Employee employee : employees) {
+            String departmentName = employee.getDepartment().getDepartment();
+            employee.setDepartment(departmentName);
+            employeeRepository.save(employee);
+        }
     }
 
     public BonusResponse getEligibleEmployeeForBonus(String date) {
