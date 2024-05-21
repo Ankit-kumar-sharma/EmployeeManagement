@@ -1,8 +1,5 @@
 package com.example.demo.model;
 
-
-
-
 import jakarta.persistence.*;
 
 import java.text.ParseException;
@@ -19,8 +16,10 @@ public class Employee {
 
     @Column
     private String empName;
+
     @Column
     private double amount;
+
     @Column
     private String currency;
 
@@ -80,10 +79,11 @@ public class Employee {
     }
 
     public void setDepartment(String departmentName) {
-        Department department=new Department();
+        Department department = new Department();
         department.setDepartment(departmentName);
         this.department = department;
     }
+
     private Date parseDate(String dateStr) {
         SimpleDateFormat formatter = new SimpleDateFormat("MMM-dd-yyyy");
         try {

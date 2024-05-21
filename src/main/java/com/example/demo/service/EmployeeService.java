@@ -4,27 +4,19 @@ import com.example.demo.BonusData;
 import com.example.demo.BonusResponse;
 import com.example.demo.CustomDateUtility;
 import com.example.demo.EmployeeBonus;
-import com.example.demo.model.Department;
 import com.example.demo.model.Employee;
 import com.example.demo.respository.DepartmentRepository;
 import com.example.demo.respository.EmployeeRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
 
-
     @Autowired
     private EmployeeRepository employeeRepository;
-    @Autowired
-    private DepartmentRepository departmentRepository;
-
 
     public void saveEmployees(List<Employee> employees) {
         for (Employee employee : employees) {

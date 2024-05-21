@@ -1,17 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.BonusResponse;
-import com.example.demo.CustomDateUtility;
-import com.example.demo.model.Department;
-import com.example.demo.model.Employee;
 import com.example.demo.model.EmployeeListWrapper;
 import com.example.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/tci")
@@ -31,7 +26,7 @@ public class EmployeeController {
 
     @PostMapping("/employee-bonus")
     public ResponseEntity<String> addEmployee(@RequestBody EmployeeListWrapper employee) {
-        try{
+        try {
             employeeService.saveEmployees(employee.getEmployees());
             return new ResponseEntity<>("Employee saved successfully", HttpStatus.CREATED);
         } catch (Exception e) {
